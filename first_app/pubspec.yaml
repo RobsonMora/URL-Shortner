@@ -26,8 +26,9 @@ dependencies:
   rounded_loading_button: ^1.0.0
   http: ^0.12.2
   animated_card: ^1.0.0+8
-  smooth_page_indicator: ^0.1.5
+  scrolling_page_indicator: ^0.1.2
   flushbar: ^1.10.4
+  expansion_tile_card: ^1.0.3
 
 
   # The following adds the Cupertino Icons font to your application.
