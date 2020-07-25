@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:expansion_tile_card/expansion_tile_card.dart';
+import 'package:first_app/openGraphParser.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:first_app/webRequest.dart';
 import 'package:flutter/material.dart';
@@ -260,33 +261,97 @@ class HistoryPage extends StatelessWidget {
                     child: AnimatedCard(
                       child: Padding(
                         padding: EdgeInsets.all(10),
-                        child: SizedBox(
-                          height: 75,
-                          width: 500,
-                          child: ExpansionTileCard(
-                            title: Text(urls.elementAt(index)["urlShort"]),
-                            subtitle: Text(urls.elementAt(index)["urlLong"]),
-                            elevation: 5,                                                        
-                            children: <Widget>[
-                              Container(                                
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: FractionalOffset.bottomCenter,
-                                    colors: [Colors.blueAccent, Colors.purple],
-                                    stops: [0, 1],
-                                  ),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20)),
-                                ),                               
-                              ),
-                            ],
-                          ),
-                        ),
+                        child: Item(urls, index),
                       ),
                     ),
                   );
                 })),
+      ),
+    );
+  }
+}
+
+class Item extends StatelessWidget {
+  final List urls;
+  final int index;
+  final OpenGraphParser htmlPreview = OpenGraphParser();
+
+  Item(this.urls, this.index);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: ExpansionTileCard(
+        title: Text(urls.elementAt(index)["urlShort"]),
+        subtitle: Padding(
+          padding: const EdgeInsets.only(top: 3),
+          child: Text(urls.elementAt(index)["urlLong"]),
+        ),
+        elevation: 5,
+        onExpansionChanged: (value) => {htmlPreview},
+        children: <Widget>[
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text(
+                'texto para mostrar no expansor',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(fontSize: 16),
+              ),
+            ),
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              ButtonBar(
+                buttonHeight: 52.0,
+                buttonMinWidth: 70.0,
+                children: <Widget>[
+                  FlatButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4.0)),
+                      onPressed: () {},
+                      child: Column(
+                        children: <Widget>[
+                          Icon(Icons.delete),
+                          Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 2)),
+                          Text('Delete')
+                        ],
+                      )),
+                  FlatButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4.0)),
+                      onPressed: () {},
+                      child: Column(
+                        children: <Widget>[
+                          Icon(Icons.open_in_browser),
+                          Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 2)),
+                          Text('Open')
+                        ],
+                      )),
+                  FlatButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4.0)),
+                      onPressed: () {},
+                      child: Column(
+                        children: <Widget>[
+                          Icon(Icons.content_copy),
+                          Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 2)),
+                          Text('Copy')
+                        ],
+                      )),
+                ],
+              )
+            ],
+          )
+        ],
       ),
     );
   }

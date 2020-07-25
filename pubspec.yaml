@@ -25,6 +25,7 @@ dependencies:
     sdk: flutter
   rounded_loading_button: ^1.0.0
   http: ^0.12.2
+  html: ^0.14.0+3
   animated_card: ^1.0.0+8
   scrolling_page_indicator: ^0.1.2
   flushbar: ^1.10.4
