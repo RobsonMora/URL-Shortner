@@ -78,17 +78,13 @@ class _HomeState extends State<Home> {
         child: FractionallySizedBox(
           widthFactor: 0.70,
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 50.0),
-            child: Column(            
+            padding: const EdgeInsets.symmetric(vertical: 15.0),
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 SizedBox(height: 50),
-                Card(
-                    elevation: 15,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16)),
-                    margin: EdgeInsets.only(bottom: 50),
-                    child: Image.asset('assets/\images/\open-graph.png')),
+                Image.asset('assets/\images/\open-graph.png'),
+                SizedBox(height: 50),
                 Container(
                   height: 70,
                   child: TextField(
@@ -99,7 +95,7 @@ class _HomeState extends State<Home> {
                       fillColor: Colors.purple,
                       labelText: 'URL',
                       suffixIcon: IconButton(
-                          icon: Icon(Icons.clear_all),
+                          icon: Icon(Icons.clear),
                           onPressed: () {
                             _textURLController.text = '';
                             _textShortController.text = '';
@@ -107,7 +103,6 @@ class _HomeState extends State<Home> {
                     ),
                     style: TextStyle(decorationColor: Colors.purple),
                     onChanged: (value) => setState(() {}),
-                    
                   ),
                 ),
                 SizedBox(
@@ -115,14 +110,15 @@ class _HomeState extends State<Home> {
                 ),
                 Container(
                   child: RoundedLoadingButton(
-                    child:
-                        Text('Short it!', style: TextStyle(color: Colors.white)),
+                    child: Text('Short it!',
+                        style: TextStyle(color: Colors.white)),
                     color: _textURLController.text.trim().isEmpty
                         ? Colors.blueGrey
-                        : Colors.purple,
+                        : Colors.blue,
                     controller: _btnController,
-                    onPressed:
-                        _textURLController.text.trim().isEmpty ? null : _doShort,
+                    onPressed: _textURLController.text.trim().isEmpty
+                        ? null
+                        : _doShort,
                   ),
                 ),
                 SizedBox(
@@ -154,7 +150,7 @@ class _HomeState extends State<Home> {
                   height: 45,
                   width: 95,
                   child: FlatButton(
-                      color: Colors.redAccent,
+                      color: Color(0xF4BEE0FF3),
                       onPressed: () {
                         AddUrl(
                             'https://g1.globo.com/politica/noticia/2020/07/26/presidente-do-stj-testa-positivo-para-coronavirus.ghtml',
